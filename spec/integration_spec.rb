@@ -7,7 +7,7 @@ set(:show_exceptions, false)
 describe('adding a new list', {:type => :feature}) do
   it('allows a user to click a list to see the tasks and details for it') do
     visit('/')
-    click_link('Add A New List')
+    click_link('add new list')
     fill_in('name', :with =>'Epicodus Work')
     click_button('Add List')
     expect(page).to have_content('Success!')
@@ -20,7 +20,7 @@ describe('viewing all the lists', {:type => :feature}) do
     list = List.new({:name => 'Epicodus Homework', :id => nil})
     list.save()
     visit('/')
-    click_link('View All Lists')
+    click_link('lists')
     expect(page).to have_content(list.name)
   end
 end
