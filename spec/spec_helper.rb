@@ -1,14 +1,17 @@
 require("rspec")
 require("pg")
+require("sinatra/activerecord")
 require("list")
 require("task")
 require('capybara/rspec')
 
-DB = PG.connect({:dbname => "to_do_database_test"})
+
+ENV['RACK_ENV'] = 'test'
 
 RSpec.configure do |config|
   config.after(:each) do
-    DB.exec("DELETE FROM lists *;")
-    DB.exec("DELETE FROM tasks *;")
+    Task.all().each() do |task|
+      task.destroy()
+    end
   end
 end
